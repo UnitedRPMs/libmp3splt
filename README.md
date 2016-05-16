@@ -1,8 +1,6 @@
-#          libmp3splt
+#          mp3splt
  
-Summary:       Libraries for the mp3Splt project
- 
-Version:       0.9.2
- 
+Summary:       Mp3Splt-project is a utility to split mp3, ogg vorbis and native FLAC files selecting a begin and an end time position, without decoding
+
 License:       GPLv2
  
