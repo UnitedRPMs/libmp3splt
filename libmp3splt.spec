@@ -5,7 +5,7 @@
 Summary:       Libraries for the mp3Splt project
 Name:          libmp3splt
 Version:       0.9.2
-Release:       2%{?dist}
+Release:       7%{?dist}
 License:       GPLv2
 Group:         Development/Libraries
 Source:        http://downloads.sourceforge.net/mp3splt/%{name}-%{version}.tar.gz
@@ -20,6 +20,7 @@ BuildRequires: doxygen, graphviz
 BuildRequires: pkgconfig
 BuildRequires: flac-devel
 BuildRequires: autoconf automake libtool gettext-devel
+BuildRequires: gcc-c++
 
 %description
 The mp3Splt project provides utilities to split mp3 and ogg files,
@@ -46,7 +47,7 @@ Requires: %{name} = %{version}-%{release}
 This package contains development files for the mp3splt project.
 
 %prep
-%setup -q
+%autosetup -n %{name}-%{version}
 autoreconf -fiv
 # Avoid standard rpaths on lib64 archs:
 sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure
@@ -58,10 +59,10 @@ sed -i -e 's|"/lib /usr/lib\b|"/%{_lib} %{_libdir}|' configure
            --with-ltdl-include=%{_includedir}
 %endif
 
-%__make %{?_smp_mflags}
+%make_build
 
 %install
-make install DESTDIR=%{buildroot}
+%make_install
 
 # Remove libtool la files:
 find %{buildroot}%{_libdir} -name '*.la' -exec rm -f {} ';'
@@ -91,6 +92,9 @@ find %{buildroot}%{_libdir} -name '*.la' -exec rm -f {} ';'
 %{_docdir}/%{name}/doxygen
 
 %changelog
+
+* Sat Nov 30 2019 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.9.2-7
+- Rebuilt
 
 * Fri Jul 08 2016 David Vásquez <davidjeremias82 AT gmail DOT com> - 0.9.2-2
 - Massive rebuild
